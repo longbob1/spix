@@ -6,26 +6,22 @@
 
 #pragma once
 
-#include <Spix/spix_export.h>
-
 #include "Command.h"
-#include <Scene/Events.h>
-#include <Spix/Data/ItemPosition.h>
+#include <Spix/Data/ItemPath.h>
 
 namespace spix {
 namespace cmd {
 
-class SPIX_EXPORT ClickOnItem : public Command {
+class DragItem : public Command {
 public:
-    ClickOnItem(ItemPosition path, MouseButton mouseButton);
-    ClickOnItem(ItemPosition path, bool eventToItem = false);
+    DragItem(ItemPath path, int x, int y);
 
     void execute(CommandEnvironment& env) override;
 
 private:
-    ItemPosition m_position;
-    MouseButton m_mouseButton;
-    bool m_eventToItem;
+    ItemPath m_path;
+    int m_x;
+    int m_y;
 };
 
 } // namespace cmd

@@ -28,6 +28,8 @@ public:
 
     // Tasks
     void takeScreenshot(const ItemPath& targetItem, const std::string& filePath) override;
+    
+    Color colorAtPoint(const ItemPath& targetItem, int x, int y) override;
 
 private:
     QtEvents m_events;

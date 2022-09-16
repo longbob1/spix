@@ -37,6 +37,8 @@ public:
 
     // Tasks
     virtual void takeScreenshot(const ItemPath& targetItem, const std::string& filePath) = 0;
+
+    virtual Color colorAtPoint(const ItemPath& targetItem, int x, int y) = 0;
 };
 
 } // namespace spix

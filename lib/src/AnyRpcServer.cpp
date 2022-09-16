@@ -32,10 +32,13 @@ AnyRpcServer::AnyRpcServer(int anyrpcPort)
         "Click on the object at the given path | mouseClick(string path)",
         [this](std::string path) { mouseClick(std::move(path)); });
 
-    utils::AddFunctionToAnyRpc<void(std::string, int)>(methodManager, "mouseClickWithButton",
-        "Click on the object at the given path with the given mouse button | mouseClickWithButton(string path, int "
-        "mouseButton)",
-        [this](std::string path, int mouseButton) { mouseClick(std::move(path), mouseButton); });
+    utils::AddFunctionToAnyRpc<void(std::string)>(methodManager, "mouseClickToItem",
+        "Click on the object at the given path", [this](std::string path) { mouseClick(std::move(path), true); });
+
+    //utils::AddFunctionToAnyRpc<void(std::string, int)>(methodManager, "mouseClickWithButton",
+    //    "Click on the object at the given path with the given mouse button | mouseClickWithButton(string path, int "
+    //    "mouseButton)",
+    //    [this](std::string path, int mouseButton) { mouseClick(std::move(path), mouseButton); });
 
     utils::AddFunctionToAnyRpc<void(std::string)>(methodManager, "mouseBeginDrag",
         "Begin a drag with the mouse | mouseBeginDrag(string path)",
@@ -56,6 +59,12 @@ AnyRpcServer::AnyRpcServer(int anyrpcPort)
     utils::AddFunctionToAnyRpc<void(std::string, int, unsigned)>(methodManager, "enterKey",
         "Press and release a key | enterKey(string path, int keyCode, unsigned int keyModifier)",
         [this](std::string path, int keyCode, unsigned modifiers) { enterKey(std::move(path), keyCode, modifiers); });
+
+    utils::AddFunctionToAnyRpc<void(std::string, int, int)>(methodManager, "dragItem", "Press and drag an item",
+        [this](std::string path, int x, int y) { dragItem(std::move(path), x, y); });
+
+    utils::AddFunctionToAnyRpc<std::string(std::string, int, int)>(methodManager, "colorAt", "Get a color at position",
+        [this](std::string path, int x, int y) { return pickColorAt(std::move(path), x, y); });
 
     utils::AddFunctionToAnyRpc<std::string(std::string, std::string)>(methodManager, "getStringProperty",
         "Return a property as string | getStringProperty(string path, string property) : string property_value",

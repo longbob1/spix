@@ -14,6 +14,14 @@ namespace cmd {
 ClickOnItem::ClickOnItem(ItemPosition path, MouseButton mouseButton)
 : m_position(std::move(path))
 , m_mouseButton(mouseButton)
+, m_eventToItem(false)
+{
+}
+
+ClickOnItem::ClickOnItem(ItemPosition path, bool eventToItem)
+: m_position(std::move(path))
+, m_mouseButton(spix::MouseButtons::Left)
+, m_eventToItem(eventToItem)
 {
 }
 
@@ -29,8 +37,8 @@ void ClickOnItem::execute(CommandEnvironment& env)
 
     auto size = item->size();
     auto mousePoint = m_position.positionForItemSize(size);
-    env.scene().events().mouseDown(item.get(), mousePoint, m_mouseButton);
-    env.scene().events().mouseUp(item.get(), mousePoint, m_mouseButton);
+    env.scene().events().mouseDown(item.get(), mousePoint, m_mouseButton, m_eventToItem);
+    env.scene().events().mouseUp(item.get(), mousePoint, m_mouseButton, m_eventToItem);
 }
 
 } // namespace cmd

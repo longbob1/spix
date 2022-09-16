@@ -27,8 +27,8 @@ protected:
         wait(std::chrono::milliseconds(500));
         mouseClick(spix::ItemPath("mainWindow/Button_1"));
         wait(std::chrono::milliseconds(500));
-        mouseClick(spix::ItemPath("mainWindow/Button_1"), spix::MouseButtons::Right);
-        wait(std::chrono::milliseconds(500));
+        //mouseClick(spix::ItemPath("mainWindow/Button_1"), spix::MouseButtons::Right);
+        //wait(std::chrono::milliseconds(500));
 
         auto result = getStringProperty("mainWindow/results", "text");
         std::cout << "-------\nResult:\n-------\n" << result << "\n-------" << std::endl;

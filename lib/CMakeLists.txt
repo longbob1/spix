@@ -32,6 +32,14 @@ set(SOURCES
 
     src/Commands/ClickOnItem.cpp
     src/Commands/ClickOnItem.h
+    src/Commands/ColorPick.cpp
+    src/Commands/ColorPick.h
+    src/Commands/CompleteDrag.cpp
+    src/Commands/CompleteDrag.h
+    src/Commands/DragItem.cpp
+    src/Commands/DragItem.h
+    src/Commands/GetGlobalPosition.cpp
+    src/Commands/GetGlobalPosition.h
     src/Commands/Command.cpp
     src/Commands/Command.h
     src/Commands/CustomCmd.cpp
@@ -64,6 +72,7 @@ set(SOURCES
     src/Commands/SetProperty.h
     src/Commands/Wait.cpp
     src/Commands/Wait.h
+
 
     src/CommandExecuter/CommandEnvironment.cpp
     src/CommandExecuter/CommandEnvironment.h

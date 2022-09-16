@@ -9,9 +9,11 @@
 #include <CommandExecuter/CommandExecuter.h>
 
 #include <Commands/ClickOnItem.h>
+#include <Commands/ColorPick.h>
 #include <Commands/CustomCmd.h>
 #include <Commands/DragBegin.h>
 #include <Commands/DragEnd.h>
+#include <Commands/DragItem.h>
 #include <Commands/DropFromExt.h>
 #include <Commands/EnterKey.h>
 #include <Commands/ExistsAndVisible.h>
@@ -64,15 +66,16 @@ void TestServer::wait(std::chrono::milliseconds waitTime)
     m_cmdExec->enqueueCommand<cmd::Wait>(waitTime);
 }
 
-void TestServer::mouseClick(ItemPath path)
+void TestServer::mouseClick(ItemPath path, bool eventToItem)
 {
-    m_cmdExec->enqueueCommand<cmd::ClickOnItem>(path, spix::MouseButtons::Left);
+    //m_cmdExec->enqueueCommand<cmd::ClickOnItem>(path, spix::MouseButtons::Left);
+    m_cmdExec->enqueueCommand<cmd::ClickOnItem>(path, eventToItem);
 }
 
-void TestServer::mouseClick(ItemPath path, MouseButton mouseButton)
-{
-    m_cmdExec->enqueueCommand<cmd::ClickOnItem>(path, mouseButton);
-}
+//void TestServer::mouseClick(ItemPath path, MouseButton mouseButton)
+//{
+//    m_cmdExec->enqueueCommand<cmd::ClickOnItem>(path, mouseButton);
+//}
 
 void TestServer::mouseBeginDrag(ItemPath path)
 {
@@ -82,6 +85,11 @@ void TestServer::mouseBeginDrag(ItemPath path)
 void TestServer::mouseEndDrag(ItemPath path)
 {
     m_cmdExec->enqueueCommand<cmd::DragEnd>(path);
+}
+
+void TestServer::dragItem(ItemPath path, int x, int y)
+{
+    m_cmdExec->enqueueCommand<cmd::DragItem>(path, x, y);
 }
 
 void TestServer::mouseDropUrls(ItemPath path, const std::vector<std::string>& urls)
@@ -163,6 +171,16 @@ std::vector<std::string> TestServer::getErrors()
 void TestServer::takeScreenshot(ItemPath targetItem, std::string filePath)
 {
     m_cmdExec->enqueueCommand<cmd::Screenshot>(targetItem, std::move(filePath));
+}
+
+std::string TestServer::pickColorAt(ItemPath path, int x, int y)
+{
+    std::promise<std::string> promise;
+    auto result = promise.get_future();
+    auto cmd = std::make_unique<cmd::ColorPick>(path, x, y, std::move(promise));
+    m_cmdExec->enqueueCommand(std::move(cmd));
+
+    return result.get();
 }
 
 void TestServer::quit()

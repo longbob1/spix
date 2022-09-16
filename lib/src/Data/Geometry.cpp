@@ -42,4 +42,11 @@ Rect::Rect(Real x, Real y, Real width, Real height)
 {
 }
 
+Color::Color(int r, int g, int b)
+: r(r)
+, g(g)
+, b(b)
+{
+}
+
 } // namespace spix

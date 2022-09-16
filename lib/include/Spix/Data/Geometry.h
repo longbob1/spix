@@ -36,4 +36,12 @@ struct SPIX_EXPORT Rect {
     Size size;
 };
 
+struct Color {
+    Color(int r, int g, int b);
+
+    int r;
+    int g;
+    int b;
+};
+
 } // namespace spix
