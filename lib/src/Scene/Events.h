@@ -21,6 +21,7 @@ public:
 
     virtual void mouseDown(Item* item, Point loc, MouseButton button, bool eventToItem = false) = 0;
     virtual void mouseUp(Item* item, Point loc, MouseButton button, bool eventToItem = false) = 0;
+    virtual void mouseDoubleClick(Item* item, Point loc, MouseButton button, bool eventToItem = false) = 0;
     virtual void mouseMove(Item* item, Point loc) = 0;
     virtual void stringInput(Item* item, const std::string& text) = 0;
     virtual void keyPress(Item* item, int keyCode, KeyModifier mod) = 0;

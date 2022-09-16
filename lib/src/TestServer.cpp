@@ -15,6 +15,7 @@
 #include <Commands/DragEnd.h>
 #include <Commands/DragItem.h>
 #include <Commands/DropFromExt.h>
+#include <Commands/DoubleClickOnItem.h>
 #include <Commands/EnterKey.h>
 #include <Commands/ExistsAndVisible.h>
 #include <Commands/GetBoundingBox.h>
@@ -70,6 +71,11 @@ void TestServer::mouseClick(ItemPath path, bool eventToItem)
 {
     //m_cmdExec->enqueueCommand<cmd::ClickOnItem>(path, spix::MouseButtons::Left);
     m_cmdExec->enqueueCommand<cmd::ClickOnItem>(path, eventToItem);
+}
+
+void TestServer::mouseDoubleClick(ItemPath path, bool eventToItem)
+{
+    m_cmdExec->enqueueCommand<cmd::DoubleClickOnItem>(path);
 }
 
 //void TestServer::mouseClick(ItemPath path, MouseButton mouseButton)

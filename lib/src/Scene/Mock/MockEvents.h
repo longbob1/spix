@@ -19,6 +19,7 @@ class SPIX_EXPORT MockEvents : public Events {
 public:
     void mouseDown(Item* item, Point loc, MouseButton button, bool signalToItem) override;
     void mouseUp(Item* item, Point loc, MouseButton button, bool signalToItem) override;
+    void mouseDoubleClick(Item* item, Point loc, MouseButton button, bool eventToItem = false) override;
     void mouseMove(Item* item, Point loc) override;
     void stringInput(Item* item, const std::string& text) override;
     void keyPress(Item* item, int keyCode, KeyModifier mod) override;

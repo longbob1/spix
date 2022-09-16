@@ -50,6 +50,8 @@ set(SOURCES
     src/Commands/DragEnd.h
     src/Commands/DropFromExt.cpp
     src/Commands/DropFromExt.h
+    src/Commands/DoubleClickOnItem.cpp
+    src/Commands/DoubleClickOnItem.h
     src/Commands/EnterKey.cpp
     src/Commands/EnterKey.h
     src/Commands/ExistsAndVisible.cpp

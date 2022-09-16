@@ -47,6 +47,7 @@ public:
     // Commands
     void wait(std::chrono::milliseconds waitTime);
     void mouseClick(ItemPath path, bool eventToItem = false);
+    void mouseDoubleClick(ItemPath path, bool eventToItem = false);
     //void mouseClick(ItemPath path, MouseButton mouseButton);
     void mouseBeginDrag(ItemPath path);
     void mouseEndDrag(ItemPath path);

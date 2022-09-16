@@ -232,6 +232,36 @@ void QtEvents::extMouseDrop(Item* item, Point loc, PasteboardContent& content)
     QGuiApplication::postEvent(window, drop);
 }
 
+void QtEvents::mouseDoubleClick(Item* item, Point loc, MouseButton button, bool eventToItem)
+{
+    QPointF windowLoc;
+    auto window = getWindowAndPositionForItem(item, loc, windowLoc);
+    if (!window)
+        return;
+
+    //FIXME: Here could be a bug for Qt6. If so, use approach from QtEvents::mouseUp for #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+    m_pressedMouseButtons |= button;
+    Qt::MouseButton eventCausingButton = getQtMouseButtonValue(button);
+    Qt::MouseButtons activeButtons = getQtMouseButtonValue(m_pressedMouseButtons);
+
+    auto qtitem = dynamic_cast<QtItem*>(item);
+
+    if (!qtitem) {
+        return;
+    }
+
+    if (eventToItem) {
+        const QPointF qtlocalPoint(loc.x, loc.y);
+        QMouseEvent* event = new QMouseEvent(
+            QEvent::MouseButtonDblClick, qtlocalPoint, eventCausingButton, activeButtons, Qt::NoModifier);
+        QGuiApplication::postEvent(qtitem->qquickitem(), event);
+    } else {
+        QMouseEvent* event = new QMouseEvent(
+            QEvent::MouseButtonDblClick, windowLoc, eventCausingButton, activeButtons, Qt::NoModifier);
+        QGuiApplication::postEvent(window, event);
+    }
+}
+
 void QtEvents::quit()
 {
     QGuiApplication::quit();

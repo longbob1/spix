@@ -22,6 +22,10 @@ void MockEvents::mouseUp(Item* item, Point loc, MouseButton /*button*/, bool /*s
     }
 }
 
+void MockEvents::mouseDoubleClick(Item* /*item*/, Point /*loc*/, MouseButton /*button*/, bool /*eventToItem*/)
+{
+}
+
 void MockEvents::mouseMove(Item* item, Point loc)
 {
     if (onMouseClickEvent) {
