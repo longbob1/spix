@@ -26,6 +26,7 @@ set(HEADERS_PUB ${HEADERS_PUB_ROOT} ${HEADERS_PUB_SUB})
 
 set(SOURCES
     ${HEADERS_PUB}
+    src/Logging.cpp
     src/AnyRpcServer.cpp
     src/QtQmlBot.cpp
     src/TestServer.cpp
