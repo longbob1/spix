@@ -17,6 +17,7 @@ public:
     DoubleClickOnItem(ItemPosition path, bool eventToItem = false);
 
     void execute(CommandEnvironment& env) override;
+    std::string toString() const override;
 
 private:
     ItemPosition m_position;

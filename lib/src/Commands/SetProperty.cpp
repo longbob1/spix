@@ -7,6 +7,7 @@
 #include "SetProperty.h"
 
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -29,5 +30,15 @@ void SetProperty::execute(CommandEnvironment& env)
     }
 }
 
+std::string SetProperty::toString() const
+{
+    std::stringstream sstream;
+    sstream << "Screenshot: ";
+    sstream << "itemPath: {" << m_path.string() << "} ";
+    sstream << "propertyName: '" << m_propertyName << "' ";
+    sstream << "propertyValue: '" << m_propertyValue << "' ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

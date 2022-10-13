@@ -20,6 +20,11 @@ Size::Size(Real width, Real height)
 {
 }
 
+std::string Size::toString() const 
+{
+    return "width: '" + std::to_string(width) + "' height: '" + std::to_string(height) + "'";
+}
+
 Point::Point()
 : x(0.0)
 , y(0.0)
@@ -32,6 +37,11 @@ Point::Point(Real x, Real y)
 {
 }
 
+std::string Point::toString() const 
+{
+    return "x: '" + std::to_string(x) + "' y: '" + std::to_string(y) + "'";
+}
+
 Rect::Rect()
 {
 }
@@ -42,6 +52,11 @@ Rect::Rect(Real x, Real y, Real width, Real height)
 {
 }
 
+std::string Rect::toString() const 
+{
+    return "topLeft: {" + topLeft.toString() +  "} size: {" + size.toString() + "}";
+}
+
 Color::Color(int r, int g, int b)
 : r(r)
 , g(g)
@@ -49,4 +64,8 @@ Color::Color(int r, int g, int b)
 {
 }
 
+std::string Color::toString() const 
+{
+    return "r: '" + std::to_string(r) + "' g: '" + std::to_string(g) + "' b: '" + std::to_string(b) + "'";
+}
 } // namespace spix

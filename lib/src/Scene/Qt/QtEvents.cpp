@@ -10,6 +10,8 @@
 #include <Scene/Qt/QtItemTools.h>
 
 #include <Spix/Data/PasteboardContent.h>
+#include <Spix/Logging.h>
+#include <Utils/DebugDump.h>
 
 #include <QGuiApplication>
 #include <QObject>
@@ -93,19 +95,29 @@ void sendQtKeyEvent(Item* item, bool press, int keyCode, KeyModifier mod)
 
 void QtEvents::mouseDown(Item* item, Point loc, MouseButton button, bool eventToItem)
 {
+    spix::logging::log("Performing mouseDown Qt event");
     QPointF windowLoc;
     auto window = getWindowAndPositionForItem(item, loc, windowLoc);
     if (!window)
+    {
+        spix::logging::log("Cannot find window");
         return;
+    }
+
+    spix::logging::log("Location in window: x: '" + std::to_string(windowLoc.x()) + "' y: '" + std::to_string(windowLoc.y()) + "'");
 
     m_pressedMouseButtons |= button;
     Qt::MouseButton eventCausingButton = getQtMouseButtonValue(button);
     Qt::MouseButtons activeButtons = getQtMouseButtonValue(m_pressedMouseButtons);
 
     auto qtitem = dynamic_cast<QtItem*>(item);
-    if (!qtitem) {
+    if (!qtitem) 
+    {
+        spix::logging::log("Cannot convert to QtItem");
         return;
     }
+
+    spix::logging::log("QtItem: " + spix::utils::toString(qtitem->qquickitem()));
 
     if (eventToItem) {
         const QPointF qtlocalPoint(loc.x, loc.y);
@@ -121,15 +133,25 @@ void QtEvents::mouseDown(Item* item, Point loc, MouseButton button, bool eventTo
 
 void QtEvents::mouseUp(Item* item, Point loc, MouseButton button, bool eventToItem)
 {
+    spix::logging::log("Performing mouseUp Qt event");
     QPointF windowLoc;
     auto window = getWindowAndPositionForItem(item, loc, windowLoc);
     if (!window)
-        return;
-
-    auto qtitem = dynamic_cast<QtItem*>(item);
-    if (!qtitem) {
+    {
+        spix::logging::log("Cannot find window");
         return;
     }
+    
+    spix::logging::log("Location in window: x: '" + std::to_string(windowLoc.x()) + "' y: '" + std::to_string(windowLoc.y()) + "'");
+
+    auto qtitem = dynamic_cast<QtItem*>(item);
+    if (!qtitem) 
+    {
+        spix::logging::log("Cannot convert to QtItem");
+        return;
+    }
+
+    spix::logging::log("QtItem: " + spix::utils::toString(qtitem->qquickitem()));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     // Qt6 expects the mouse to be down during the event
@@ -157,10 +179,16 @@ void QtEvents::mouseUp(Item* item, Point loc, MouseButton button, bool eventToIt
 
 void QtEvents::mouseMove(Item* item, Point loc)
 {
+    spix::logging::log("Performing mouseMove Qt event");
     QPointF windowLoc;
     auto window = getWindowAndPositionForItem(item, loc, windowLoc);
     if (!window)
+    {
+        spix::logging::log("Cannot find window");
         return;
+    }
+
+    spix::logging::log("Location in window: x: '" + std::to_string(windowLoc.x()) + "' y: '" + std::to_string(windowLoc.y()) + "'");
 
     Qt::MouseButton activeButtons = getQtMouseButtonValue(m_pressedMouseButtons);
 
@@ -179,9 +207,15 @@ void QtEvents::mouseMove(Item* item, Point loc)
 
 void QtEvents::stringInput(Item* item, const std::string& text)
 {
+    spix::logging::log("Performing stringInput Qt event");
     auto qtitem = dynamic_cast<QtItem*>(item);
     if (!qtitem)
+    {
+        spix::logging::log("Cannot convert to QtItem");
         return;
+    }
+
+    spix::logging::log("QtItem: " + spix::utils::toString(qtitem->qquickitem()));
 
     auto window = qtitem->qquickitem()->window();
 
@@ -191,16 +225,19 @@ void QtEvents::stringInput(Item* item, const std::string& text)
 
 void QtEvents::keyPress(Item* item, int keyCode, KeyModifier mod)
 {
+    spix::logging::log("Performing keyPress Qt event");
     sendQtKeyEvent(item, true, keyCode, mod);
 }
 
 void QtEvents::keyRelease(Item* item, int keyCode, KeyModifier mod)
 {
+    spix::logging::log("Performing keyRelease Qt event");
     sendQtKeyEvent(item, false, keyCode, mod);
 }
 
 void QtEvents::extMouseDrop(Item* item, Point loc, PasteboardContent& content)
 {
+    spix::logging::log("Performing extMouseDrop Qt event");
     auto qtitem = dynamic_cast<QtItem*>(item);
     if (!qtitem)
         return;
@@ -234,10 +271,16 @@ void QtEvents::extMouseDrop(Item* item, Point loc, PasteboardContent& content)
 
 void QtEvents::mouseDoubleClick(Item* item, Point loc, MouseButton button, bool eventToItem)
 {
+    spix::logging::log("Performing mouseDoubleClick Qt event");
     QPointF windowLoc;
     auto window = getWindowAndPositionForItem(item, loc, windowLoc);
     if (!window)
+    {
+        spix::logging::log("Cannot find window");
         return;
+    }
+
+    spix::logging::log("Location in window: x: '" + std::to_string(windowLoc.x()) + "' y: '" + std::to_string(windowLoc.y()) + "'");
 
     //FIXME: Here could be a bug for Qt6. If so, use approach from QtEvents::mouseUp for #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
     m_pressedMouseButtons |= button;
@@ -246,9 +289,13 @@ void QtEvents::mouseDoubleClick(Item* item, Point loc, MouseButton button, bool 
 
     auto qtitem = dynamic_cast<QtItem*>(item);
 
-    if (!qtitem) {
+    if (!qtitem) 
+    {
+        spix::logging::log("Cannot convert to QtItem");
         return;
     }
+
+    spix::logging::log("QtItem: " + spix::utils::toString(qtitem->qquickitem()));
 
     if (eventToItem) {
         const QPointF qtlocalPoint(loc.x, loc.y);
@@ -264,6 +311,7 @@ void QtEvents::mouseDoubleClick(Item* item, Point loc, MouseButton button, bool 
 
 void QtEvents::quit()
 {
+    spix::logging::log("Performing quit Qt event");
     QGuiApplication::quit();
 }
 

@@ -7,6 +7,7 @@
 #include "GetTestStatus.h"
 
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -21,5 +22,9 @@ void GetTestStatus::execute(CommandEnvironment& env)
     m_promise.set_value(env.state().errors());
 }
 
+std::string GetTestStatus::toString() const
+{
+    return "GetTestStatus";
+}
 } // namespace cmd
 } // namespace spix

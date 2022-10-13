@@ -5,6 +5,7 @@
  ****/
 
 #pragma once
+#include <string>
 
 namespace spix {
 
@@ -166,4 +167,7 @@ struct MouseButtons {
     };
 };
 
+std::string toStringKeyCode(int code);
+std::string toStringKeyModifier(KeyModifier modifier);
+std::string toStringMouseButton(MouseButton button);
 } // namespace spix

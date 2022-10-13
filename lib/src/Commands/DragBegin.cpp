@@ -7,6 +7,7 @@
 #include "DragBegin.h"
 
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -31,5 +32,13 @@ void DragBegin::execute(CommandEnvironment& env)
     env.scene().events().mouseMove(item.get(), midPoint);
 }
 
+std::string DragBegin::toString() const
+{
+    std::stringstream sstream;
+    sstream << "DragBegin: ";
+    sstream << "path: {" << m_path.string() << "} ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

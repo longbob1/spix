@@ -9,6 +9,7 @@
 #include <Scene/Scene.h>
 #include <Spix/Events/Identifiers.h>
 #include <thread>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -48,5 +49,17 @@ void CompleteDrag::execute(CommandEnvironment& env)
     env.scene().events().mouseUp(item.get(), nextPoint, spix::MouseButtons::Left);
 }
 
+std::string CompleteDrag::toString() const
+{
+    std::stringstream sstream;
+    sstream << "CompleteDrag: ";
+    sstream << "from_x: '" << m_from_x << "' ";
+    sstream << "from_y: '" << m_from_y << "' ";
+    sstream << "to_x: '" << m_to_x << "' ";
+    sstream << "to_y: '" << m_to_y << "' ";
+    sstream << "path: {" << m_path.string() << "} ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

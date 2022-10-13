@@ -17,6 +17,7 @@ public:
     CompleteDrag(ItemPath path, int from_x, int from_y, int to_x, int to_y);
 
     void execute(CommandEnvironment& env) override;
+    std::string toString() const override;
 
 private:
     ItemPath m_path;

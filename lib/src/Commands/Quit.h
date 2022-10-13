@@ -14,6 +14,7 @@ namespace cmd {
 class Quit : public Command {
 public:
     void execute(CommandEnvironment& env) override;
+    std::string toString() const override;
 };
 
 } // namespace cmd

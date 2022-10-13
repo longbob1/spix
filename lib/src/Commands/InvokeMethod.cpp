@@ -7,6 +7,7 @@
 #include "InvokeMethod.h"
 
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -35,5 +36,14 @@ void InvokeMethod::execute(CommandEnvironment& env)
     }
 }
 
+std::string InvokeMethod::toString() const
+{
+    std::stringstream sstream;
+    sstream << "InvokeMethod: ";
+    sstream << "path: {" << m_path.string() << "} ";
+    sstream << "method: '" << m_method << "' ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

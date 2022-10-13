@@ -7,6 +7,7 @@
 #include "ExistsAndVisible.h"
 
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -28,5 +29,13 @@ void ExistsAndVisible::execute(CommandEnvironment& env)
     }
 }
 
+std::string ExistsAndVisible::toString() const
+{
+    std::stringstream sstream;
+    sstream << "ExistsAndVisible: ";
+    sstream << "path: {" << m_path.string() << "} ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

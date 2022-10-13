@@ -17,6 +17,7 @@ public:
     InputText(ItemPath path, std::string text);
 
     void execute(CommandEnvironment& env) override;
+    std::string toString() const override;
 
 private:
     ItemPath m_path;

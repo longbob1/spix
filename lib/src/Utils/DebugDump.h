@@ -5,6 +5,7 @@
  ****/
 
 #pragma once
+#include <string>
 
 class QObject;
 struct QMetaObject;
@@ -13,6 +14,7 @@ class QQuickItem;
 namespace spix {
 namespace utils {
 
+std::string toString(const QObject* obj);
 void DumpObject(const QObject* obj);
 void DumpObjectTree(const QObject* obj, int level = 0);
 void DumpMetaObject(const QMetaObject* meta);

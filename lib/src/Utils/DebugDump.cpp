@@ -11,6 +11,7 @@
 #include <QQuickItem>
 
 #include <iostream>
+#include <sstream>
 
 namespace {
 void helper_indentbylevel(int level)
@@ -23,6 +24,24 @@ void helper_indentbylevel(int level)
 
 namespace spix {
 namespace utils {
+
+std::string toString(const QObject* obj)
+{
+    std::stringstream sstream;
+
+    auto meta = obj->metaObject();
+
+    sstream << "objectName: '" << obj->objectName().toStdString() << "' ";
+    sstream << "className: '" << meta->className() << "' ";
+
+    std::cout << "\"" << obj->objectName().toStdString() << "\" [" << meta->className();
+    for(int i = 0; i < meta->propertyCount(); ++i){
+        auto property = meta->property(i);
+        sstream << property.name() << ": '" << obj->property(property.name()).toString().toStdString() << "' ";
+    }
+
+    return sstream.str();
+}
 
 void DumpObject(const QObject* obj)
 {

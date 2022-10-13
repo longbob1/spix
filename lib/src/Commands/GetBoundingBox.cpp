@@ -7,6 +7,7 @@
 #include "GetBoundingBox.h"
 
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -30,5 +31,13 @@ void GetBoundingBox::execute(CommandEnvironment& env)
     }
 }
 
+std::string GetBoundingBox::toString() const
+{
+    std::stringstream sstream;
+    sstream << "GetBoundingBox: ";
+    sstream << "path: {" << m_path.string() << "} ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

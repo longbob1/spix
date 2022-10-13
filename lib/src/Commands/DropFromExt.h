@@ -20,6 +20,7 @@ public:
     DropFromExt(ItemPath path, PasteboardContent content);
 
     void execute(CommandEnvironment& env) override;
+    std::string toString() const override;
 
 private:
     ItemPath m_path;

@@ -7,6 +7,7 @@
 #include "DoubleClickOnItem.h"
 
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -34,5 +35,14 @@ void DoubleClickOnItem::execute(CommandEnvironment& env)
     env.scene().events().mouseDoubleClick(item.get(), mousePoint, spix::MouseButtons::Left, m_eventToItem);
 }
 
+std::string DoubleClickOnItem::toString() const
+{
+    std::stringstream sstream;
+    sstream << "DoubleClickOnItem: ";
+    sstream << "eventToItem: '" << m_eventToItem << "' ";
+    sstream << "position: {" << m_position.toString() << "} ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

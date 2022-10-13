@@ -28,5 +28,15 @@ void ColorPick::execute(CommandEnvironment& env)
     m_promise.set_value(str.str());
 }
 
+std::string ColorPick::toString() const
+{
+    std::stringstream sstream;
+    sstream << "ColorPick: ";
+    sstream << "x: '" << m_x << "' ";
+    sstream << "y: '" << m_y << "' ";
+    sstream << "itemPath: {" << m_itemPath.string() << "} ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

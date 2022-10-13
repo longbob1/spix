@@ -7,6 +7,7 @@
 #include "EnterKey.h"
 
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -30,5 +31,15 @@ void EnterKey::execute(CommandEnvironment& env)
     }
 }
 
+std::string EnterKey::toString() const
+{
+    std::stringstream sstream;
+    sstream << "EnterKey: ";
+    sstream << "path: {" << m_path.string() << "} ";
+    sstream << "keyCode: '" << spix::toStringKeyCode(m_keyCode) << "' ";
+    sstream << "mod: '" << spix::toStringKeyModifier(m_mod) << "' ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

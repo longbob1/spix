@@ -19,6 +19,7 @@ public:
     GetGlobalPosition(ItemPath path, std::promise<std::string> promise);
 
     void execute(CommandEnvironment& env) override;
+    std::string toString() const override;
 
 private:
     ItemPath m_path;

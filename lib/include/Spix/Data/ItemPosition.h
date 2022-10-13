@@ -35,6 +35,7 @@ public:
 
     const ItemPath& itemPath() const;
     Point positionForItemSize(const Size& size) const;
+    std::string toString() const;
 
 private:
     ItemPath m_itemPath;

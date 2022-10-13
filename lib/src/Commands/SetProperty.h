@@ -17,6 +17,7 @@ public:
     SetProperty(ItemPath path, std::string propertyName, std::string propertyValue);
 
     void execute(CommandEnvironment& env) override;
+    std::string toString() const override;
 
 private:
     ItemPath m_path;

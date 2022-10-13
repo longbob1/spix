@@ -7,6 +7,7 @@
 #include "ClickOnItem.h"
 
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -39,6 +40,17 @@ void ClickOnItem::execute(CommandEnvironment& env)
     auto mousePoint = m_position.positionForItemSize(size);
     env.scene().events().mouseDown(item.get(), mousePoint, m_mouseButton, m_eventToItem);
     env.scene().events().mouseUp(item.get(), mousePoint, m_mouseButton, m_eventToItem);
+}
+
+std::string ClickOnItem::toString() const
+{
+    std::stringstream sstream;
+    sstream << "ClickOnItem: ";
+    sstream << "position: {" << m_position.toString() << "} ";
+    sstream << "mouseButton: '" << spix::toStringMouseButton(m_mouseButton) << "' ";
+    sstream << "eventToItem: '" << m_eventToItem << "' ";
+
+    return sstream.str();
 }
 
 } // namespace cmd

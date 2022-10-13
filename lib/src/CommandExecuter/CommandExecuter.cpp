@@ -6,6 +6,7 @@
 
 #include "CommandExecuter.h"
 #include "CommandEnvironment.h"
+#include <Spix/Logging.h>
 
 #include <cassert>
 
@@ -44,9 +45,13 @@ void CommandExecuter::processCommands(Scene& scene)
 
     while (!m_commandQueue.empty()) {
         auto& queuedCmd = m_commandQueue.front();
+        logging::log("Picked new command from queue: " + queuedCmd->toString());
 
         if (!queuedCmd->canExecuteNow())
+        {
+            logging::log("Cannot execute picked command now, exiting queue loop");
             break;
+        }
 
         // We can execute the command now.
         // Remove from queue and execute.
@@ -54,7 +59,10 @@ void CommandExecuter::processCommands(Scene& scene)
         m_commandQueue.pop();
 
         lock.unlock();
+
+        logging::log("Executing command: " + localCmd->toString());
         localCmd->execute(env);
+        logging::log("Done executing command: " + localCmd->toString());
         if (!lock.try_lock()) {
             return;
         }

@@ -18,6 +18,7 @@ public:
     ColorPick(ItemPath targetItemPath, int x, int y, std::promise<std::string> promise);
 
     void execute(CommandEnvironment& env) override;
+    std::string toString() const override;
 
 private:
     ItemPath m_itemPath;

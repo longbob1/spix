@@ -25,4 +25,8 @@ Point ItemPosition::positionForItemSize(const Size& size) const
     return {size.width * m_proportion.x + m_offset.x, size.height * m_proportion.y + m_offset.y};
 }
 
+std::string ItemPosition::toString() const
+{
+    return "itemPath: {" + m_itemPath.string() + "} proportion: {" + m_proportion.toString() + "} offset: {" + m_offset.toString() + "}";
+}
 } // namespace spix

@@ -24,6 +24,7 @@ public:
 
     void execute(spix::CommandEnvironment&) override;
     bool canExecuteNow() override;
+    std::string toString() const override;
 
 private:
     ExecFunction m_exec;

@@ -17,6 +17,7 @@ public:
     Screenshot(ItemPath targetItemPath, std::string filePath);
 
     void execute(CommandEnvironment& env) override;
+    std::string toString() const override;
 
 private:
     ItemPath m_itemPath;

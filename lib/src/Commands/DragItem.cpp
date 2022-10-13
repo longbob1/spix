@@ -8,6 +8,7 @@
 
 #include <Scene/Scene.h>
 #include <Spix/Events/Identifiers.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -40,5 +41,15 @@ void DragItem::execute(CommandEnvironment& env)
     env.scene().events().mouseUp(item.get(), nextPoint, spix::MouseButtons::Left);
 }
 
+std::string DragItem::toString() const
+{
+    std::stringstream sstream;
+    sstream << "DragItem: ";
+    sstream << "path: {" << m_path.string() << "} ";
+    sstream << "x: '" << m_x << "' ";
+    sstream << "y: '" << m_y << "' ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

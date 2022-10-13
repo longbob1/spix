@@ -88,6 +88,8 @@ set(SOURCES
     src/Data/ItemPath.cpp
     src/Data/ItemPosition.cpp
     src/Data/PasteboardContent.cpp
+	
+    src/Events/Identifiers.cpp
 
     src/Scene/Events.h
     src/Scene/Item.h

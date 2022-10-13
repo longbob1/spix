@@ -19,6 +19,7 @@ public:
 
     void execute(CommandEnvironment&) override;
     bool canExecuteNow() override;
+    std::string toString() const override;
 
 private:
     bool m_timerInitialized = false;

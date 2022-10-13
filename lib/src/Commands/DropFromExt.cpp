@@ -8,6 +8,7 @@
 
 #include <CommandExecuter/CommandEnvironment.h>
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -32,5 +33,13 @@ void DropFromExt::execute(CommandEnvironment& env)
     env.scene().events().extMouseDrop(item.get(), midPoint, m_content);
 }
 
+std::string DropFromExt::toString() const
+{
+    std::stringstream sstream;
+    sstream << "DropFromExt: ";
+    sstream << "path: {" << m_path.string() << "} ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

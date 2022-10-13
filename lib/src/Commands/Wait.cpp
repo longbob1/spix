@@ -5,6 +5,7 @@
  ****/
 
 #include "Wait.h"
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -30,5 +31,13 @@ bool Wait::canExecuteNow()
     return timeSinceStart >= m_waitTime;
 }
 
+std::string Wait::toString() const
+{
+    std::stringstream sstream;
+    sstream << "Wait: ";
+    sstream << "waitTime: '" << m_waitTime.count() << "' ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

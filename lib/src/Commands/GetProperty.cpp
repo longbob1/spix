@@ -7,6 +7,7 @@
 #include "GetProperty.h"
 
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -31,5 +32,14 @@ void GetProperty::execute(CommandEnvironment& env)
     }
 }
 
+std::string GetProperty::toString() const
+{
+    std::stringstream sstream;
+    sstream << "GetProperty: ";
+    sstream << "path: {" << m_path.string() << "} ";
+    sstream << "propertyName: '" << m_propertyName << "' ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

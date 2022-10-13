@@ -36,5 +36,13 @@ void GetGlobalPosition::execute(CommandEnvironment& env)
     }
 }
 
+std::string GetGlobalPosition::toString() const
+{
+    std::stringstream sstream;
+    sstream << "GetGlobalPosition: ";
+    sstream << "path: {" << m_path.string() << "} ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

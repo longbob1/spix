@@ -7,6 +7,7 @@
 #include "DragEnd.h"
 
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -31,5 +32,13 @@ void DragEnd::execute(CommandEnvironment& env)
     env.scene().events().mouseUp(item.get(), midPoint, MouseButtons::Left);
 }
 
+std::string DragEnd::toString() const
+{
+    std::stringstream sstream;
+    sstream << "DragEnd: ";
+    sstream << "path: {" << m_path.string() << "} ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix

@@ -22,6 +22,7 @@ public:
     InvokeMethod(ItemPath path, std::string method, std::vector<Variant> args, std::promise<Variant> promise);
 
     void execute(CommandEnvironment& env) override;
+    std::string toString() const override;
 
 private:
     ItemPath m_path;

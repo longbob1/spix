@@ -19,6 +19,7 @@ public:
 
     virtual void execute(CommandEnvironment& env) = 0;
     virtual bool canExecuteNow();
+    virtual std::string toString() const = 0;
 };
 
 } // namespace cmd

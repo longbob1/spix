@@ -5,6 +5,7 @@
  ****/
 
 #include "CustomCmd.h"
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -25,5 +26,9 @@ bool CustomCmd::canExecuteNow()
     return m_canExec();
 }
 
+std::string CustomCmd::toString() const
+{
+    return "CustomCmd";
+}
 } // namespace cmd
 } // namespace spix

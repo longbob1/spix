@@ -21,6 +21,7 @@ public:
     GetTestStatus(bool errorsOnly, std::promise<StatusStrings> promise);
 
     void execute(CommandEnvironment& env) override;
+    std::string toString() const override;
 
 private:
     std::promise<StatusStrings> m_promise;

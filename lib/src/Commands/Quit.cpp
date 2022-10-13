@@ -7,6 +7,7 @@
 #include "Quit.h"
 
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -16,5 +17,9 @@ void Quit::execute(CommandEnvironment& env)
     env.scene().events().quit();
 }
 
+std::string Quit::toString() const
+{
+    return "Quit";
+}
 } // namespace cmd
 } // namespace spix

@@ -7,6 +7,7 @@
 #include "InputText.h"
 
 #include <Scene/Scene.h>
+#include <sstream>
 
 namespace spix {
 namespace cmd {
@@ -28,5 +29,14 @@ void InputText::execute(CommandEnvironment& env)
     }
 }
 
+std::string InputText::toString() const
+{
+    std::stringstream sstream;
+    sstream << "InputText: ";
+    sstream << "path: {" << m_path.string() << "} ";
+    sstream << "text: '" << m_text << "' ";
+
+    return sstream.str();
+}
 } // namespace cmd
 } // namespace spix
